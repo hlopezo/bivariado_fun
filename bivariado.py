@@ -12,19 +12,20 @@ def calcular_estadisticas(tabla, grupo, objetivo):
     bad_rate = bad_count / total_count
     good_pct_pct = good_pct / np.sum(good_pct)
     bad_pct_pct = bad_pct / np.sum(bad_pct)
-    woe = np.where(bad_pct_pct == 0, 0, np.log(good_pct_pct / bad_pct_pct))#woe = np.log(good_pct_pct / bad_pct_pct)
+    woe = np.where(bad_pct_pct == 0, 0, np.log(good_pct_pct / bad_pct_pct))
     iv = (good_pct_pct - bad_pct_pct) * woe
-    total_iv=np.sum(iv)
+    total_iv = np.sum(iv)
     result = pd.DataFrame({
         'Cantidad de deudores': total_count,
-        'Distribucion de deudores': total_pct*100,
+        'Distribucion de deudores': total_pct * 100,
         'Numero de deudores Buenos': good_count,
         'Numero de deudores Malos': bad_count,
-        'Tasa de malos': bad_rate*100,
-        'Distribucion de buenos': good_pct*100,
-        'Distribucion de malos': bad_pct*100,
+        'Tasa de malos': bad_rate * 100,
+        'Distribucion de buenos': good_pct * 100,
+        'Distribucion de malos': bad_pct * 100,
         'WOE': woe,
-        'IV': iv*100,
-        'Sum_IV' :total_iv*100
+        'IV': iv * 100,
+        'Sum_IV': total_iv * 100
     })
+    result['woes'] = result['woes'].replace([np.inf], 0)
     return result
