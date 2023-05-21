@@ -27,5 +27,5 @@ def calcular_estadisticas(tabla, grupo, objetivo):
         'IV': iv * 100,
         'Sum_IV': total_iv * 100
     })
-    result['woe'] = result['woe'].replace([np.inf], 0)
+    result['WOE'] = result['WOE'].replace([np.inf], 0)
     return result
